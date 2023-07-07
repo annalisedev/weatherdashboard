@@ -40,3 +40,8 @@
     background-color: rgb(105, 159, 159);
     color: white;
   }
+
+  .submit{
+    width: 100%;
+    margin: 6px;
+  }
