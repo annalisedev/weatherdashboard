@@ -33,7 +33,19 @@ async function getWeatherData(cityName){
     let forecastApi = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apikey}`;
     let forecast = await fetch(forecastApi);
     let responsefc = await forecast.json();
-    console.log(JSON.stringify(responsefc));
+    //console.log(JSON.stringify(responsefc));
+    for (let i = 0; i < responsefc['list'].length; i++) {
+        let responsetime = responsefc['list'][i]['dt'];
+        if (dayjs.utc(responsetime * 1000).format('HH') === '12') {
+            console.log(dayjs.utc(responsetime * 1000).format('DD/MM/YYYY HH:MM'));
+            var daytemp = responsefc['list'][i]['main']['temp'];
+            console.log(daytemp);
+            var daywind = responsefc['list'][i]['wind']['speed'];
+            console.log(daywind);
+            var dayhum = responsefc['list'][i]['main']['humidity'];
+            console.log(dayhum);
+        }
+    }
 }
 
 function getPreviousSearches() {
