@@ -1,8 +1,16 @@
 var searchBoxEl = document.querySelector('#search-form');
 var previousSearchEl = document.getElementById('#previoussearch');
 var searchInputVal = document.querySelector('#search-input');
+var currentInfoEl = $('#currentinfo');
+var forecastEl = $('#forecast');
+var forcastCardEl = $('#forecast-card');
 
 apikey = 'bff7f172d54c9090fd530264d808d798';
+
+$(document).ready(function () {
+    forecastEl.empty();
+    document.getElementById('currentinfo').style.display = 'none';
+});
 
 function handleSearchSubmit(event) {
     event.preventDefault();
@@ -30,21 +38,39 @@ async function getWeatherData(cityName){
     // grab the long and lat of the first object as it's the most probable
     let lon = JSON.stringify(response[0]['lon']);
     let lat = JSON.stringify(response[0]['lat']);
-    let forecastApi = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apikey}`;
+    let forecastApi = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric`;
     let forecast = await fetch(forecastApi);
     let responsefc = await forecast.json();
-    //console.log(JSON.stringify(responsefc));
-    for (let i = 0; i < responsefc['list'].length; i++) {
-        let responsetime = responsefc['list'][i]['dt'];
-        if (dayjs.utc(responsetime * 1000).format('HH') === '12') {
-            console.log(dayjs.utc(responsetime * 1000).format('DD/MM/YYYY HH:MM'));
-            var daytemp = responsefc['list'][i]['main']['temp'];
-            console.log(daytemp);
-            var daywind = responsefc['list'][i]['wind']['speed'];
-            console.log(daywind);
-            var dayhum = responsefc['list'][i]['main']['humidity'];
-            console.log(dayhum);
+    for (let i = 0; i <= 5; i++) {
+        if (i === 0){
+            var daycount = 0;
+            let responsetime = responsefc['list'][daycount]['dt'];
+            var daytemp = responsefc['list'][daycount]['main']['temp'];
+            var daywind = responsefc['list'][daycount]['wind']['speed'];
+            var dayhum = responsefc['list'][daycount]['main']['humidity'];
+            var dayicon = responsefc['list'][daycount]['weather'][0]['icon'];
+
+            currentInfoEl.children('h2').text(cityName + ' ' + dayjs.utc(responsetime * 1000).format(`(DD/MM/YYYY)`));
+            currentInfoEl.children('img').attr('src', `https://openweathermap.org/img/wn/${dayicon}@2x.png`);
+            currentInfoEl.children('p').eq(0).text('Temp: ' + daytemp + "ºC");
+            currentInfoEl.children('p').eq(1).text('Wind: ' + daywind + 'km/h');
+            currentInfoEl.children('p').eq(2).text('Humidity: ' + dayhum + '%');
+            document.getElementById('currentinfo').style.display = 'block';
+        } else {
+            var daycount = (i * 8) - 1;
+            let responsetime = responsefc['list'][daycount]['dt'];
+            var daytemp = responsefc['list'][daycount]['main']['temp'];
+            var daywind = responsefc['list'][daycount]['wind']['speed'];
+            var dayhum = responsefc['list'][daycount]['main']['humidity'];
+            var dayicon = responsefc['list'][daycount]['weather'][0]['icon'];
+            forcastCardEl.children('div').children('h5').text(dayjs.utc(responsetime * 1000).format(`DD/MM/YYYY`));
+            forcastCardEl.children('div').children('img').attr('src', `https://openweathermap.org/img/wn/${dayicon}@2x.png`);
+            forcastCardEl.children('div').children('p').eq(0).text('Temp: ' + daytemp + "ºC");
+            forcastCardEl.children('div').children('p').eq(1).text('Wind: ' + daywind + 'km/h');
+            forcastCardEl.children('div').children('p').eq(2).text('Humidity: ' + dayhum + '%');
+            forecastEl.append(forcastCardEl.clone());
         }
+        
     }
 }
 
@@ -63,3 +89,9 @@ function getPreviousSearches() {
 
 getPreviousSearches();
 searchBoxEl.addEventListener('submit', handleSearchSubmit);
+
+$('li').click(function(event) {
+    var text = jQuery(this).text();
+    forecastEl.empty();
+    getWeatherData(text);
+});
