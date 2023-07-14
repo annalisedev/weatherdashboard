@@ -26,13 +26,13 @@
                     <br>
                 <div class="previoussearch" id="previoussearch">
                     <h2>Previous searches</h2> <br>
-                    <ul>
+                    <ul class="button">
                         <li> </li>
                     </ul>
                 </div>
             </div>
         </section>
-        <div class="col-sm-10">
+        <div class="col-sm-9">
             <div class="currentinfo" id="currentinfo">
                 <h2>City Name</h2>
                 <img src="https://openweathermap.org/img/wn/10d@2x.png"/>
@@ -40,24 +40,20 @@
                 <p>Wind:</p>
                 <p>Humidity:</p>
             </div>
-            
-            <div class="row" id="forecast">
-                <div class="card" id="forecast-card" style="width: 18rem;">
+            <div class="row col-sm-10" id="forecast">
+                <div class="card col-sm-2" id="forecast-card">
                     <div class="card-body">
                       <h5 class="card-title">Date</h5>
                       <img src="https://openweathermap.org/img/wn/10d@2x.png"/>
-                      <p class="card-text">Temp:</p>
-                      <p class="card-text">Wind:</p>
-                      <p class="card-text">Humidity:</p>
+                      <p class="card-text mx-auto">Temp:</p>
+                      <p class="card-text mx-auto">Wind:</p>
+                      <p class="card-text mx-auto">Humidity:</p>
                     </div>
                 </div>                  
             </div>
         </div>
     </div>
     
-
-
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
