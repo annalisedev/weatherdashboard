@@ -40,13 +40,13 @@ function handleSearchSubmit(event) {
 
 //function to call API and pull city information for forecast and current weather information
 async function getWeatherData(cityName){
-    let coordByLocation = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apikey}`;
+    let coordByLocation = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apikey}`;
     let coordForCity = await fetch(coordByLocation);
     let response = await coordForCity.json();
     // grab the long and lat of the first object as it's the most probable
     let lon = JSON.stringify(response[0]['lon']);
     let lat = JSON.stringify(response[0]['lat']);
-    let forecastApi = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric`;
+    let forecastApi = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric`;
     let forecast = await fetch(forecastApi);
     let responsefc = await forecast.json();
 
