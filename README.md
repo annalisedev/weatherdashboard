@@ -15,7 +15,7 @@ The Github Repository can be found here: https://github.com/annalisedev/weatherd
 ## Screenshot
 
 A screenshot of the deployed application can be found in assets:
-![ScreenshotofApplication](./Assets/images/ScreenshotWeatherApp.png)
+![ScreenshotofApplication](./assets/images/ScreenshotWeatherApp.png)
 
 ## Support
 
