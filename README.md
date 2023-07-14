@@ -2,18 +2,20 @@
 
 ## Link to Deployed Application
 
-A link to the deployed application can be found here: 
+A link to the deployed application can be found here: https://annalisedev.github.io/weatherdashboard/
 
 ## Description
 
 This week's Challenge required me to build a weather application leveraging Open Weather API's. The application retrieves weather data for cities. It displays the current weather for the day in the city searched, as well as a 5-day forecast. As part of this forecast it shows the temperature in celcius, the wind, humidity as well as weather icon. To do this, the application first needs to pull the latitude and longtitude codes for the searched city, and then feeds this into the next api which pulls the data. The application also saves recent searches to local storage and displays them for the user to click on and revisit the weather data for that location.
+
+The page meets the acceptance criteria provided in the challenge. It has a clean, polished and responsive user interface.
 
 The Github Repository can be found here: https://github.com/annalisedev/weatherdashboard 
 
 ## Screenshot
 
 A screenshot of the deployed application can be found in assets:
-![ScreenshotofApplication](./assets/images/ScreenshotWeatherApp.png)
+![ScreenshotofApplication](./Assets/images/ScreenshotWeatherApp.png)
 
 ## Support
 
